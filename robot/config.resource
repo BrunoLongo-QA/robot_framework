@@ -6,7 +6,7 @@
 ## Pay attention to the lines numbers, those are important DOESN'T CHANGE THE LINES SEQUENCE.
 *** Variables ***
 ## Down below input the API URL (remember to point to local https://local.blueops.net/tupix/api/v1 or the QA URL https://qa.blueops.net/tupix/api/v1/).
-${URLAPI}            https://local.blueops.net/tupix/api/v1
+${URLAPI}
 
 ## Down below inform your API token (remember that you can have a local token, a QA token and a PROD token).
 ${TOKEN}

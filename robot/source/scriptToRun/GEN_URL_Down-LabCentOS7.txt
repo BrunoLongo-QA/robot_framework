@@ -1,0 +1,7 @@
+cl1
+"GEN_URL_Down.yml"
+
+"centos8"
+"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"
+120
+aborted

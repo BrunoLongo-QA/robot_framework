@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200527 11:56:24.158" rpa="false">
+<suite id="s1" name="apiTest" source="/Users/blongo/Documents/gitHub/qaInitiative/robot/suites/apiTest.robot">
+<test id="s1-t1" name="Get The Playbook Files">
+<kw name="Count Files In Directory" library="OperatingSystem">
+<doc>Wrapper for `Count Items In Directory` returning only file count.</doc>
+<arguments>
+<arg>${localPath}/scriptToRun</arg>
+</arguments>
+<assign>
+<var>${qtdScripts}</var>
+</assign>
+<msg timestamp="20200527 11:56:26.977" level="INFO" html="yes">Listing contents of directory '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/source/scriptToRun"&gt;/Users/blongo/Documents/gitHub/qaInitiative/source/scriptToRun&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:56:26.977" level="FAIL">Directory '/Users/blongo/Documents/gitHub/qaInitiative/source/scriptToRun' does not exist.</msg>
+<status status="FAIL" starttime="20200527 11:56:26.975" endtime="20200527 11:56:26.977"></status>
+</kw>
+<doc>Check the directory and load all quantity of files and the files name for use in the loop</doc>
+<status status="FAIL" starttime="20200527 11:56:26.973" endtime="20200527 11:56:26.978" critical="yes">Directory '/Users/blongo/Documents/gitHub/qaInitiative/source/scriptToRun' does not exist.</status>
+</test>
+<test id="s1-t2" name="Running The Playbook Files">
+<kw name="Connect To API" library="apiNext">
+<doc>Connect to Next API end point</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>qaNextAPI</arg>
+<arg>${urlAPI}</arg>
+<arg>verify=False</arg>
+</arguments>
+<msg timestamp="20200527 11:56:26.980" level="INFO">Creating Session using : alias=qaNextAPI, url=https://qa.blueops.net/api/v1/tupix/clients/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200527 11:56:26.980" endtime="20200527 11:56:26.980"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:56:26.979" endtime="20200527 11:56:26.981"></status>
+</kw>
+<kw name="${index} IN RANGE [ ${qtdScripts} ]" type="for">
+<msg timestamp="20200527 11:56:26.982" level="FAIL">Variable '${qtdScripts}' not found.</msg>
+<status status="FAIL" starttime="20200527 11:56:26.981" endtime="20200527 11:56:26.982"></status>
+</kw>
+<doc>Will check for every file on the directory and run the playbook</doc>
+<status status="FAIL" starttime="20200527 11:56:26.978" endtime="20200527 11:56:26.983" critical="yes">Variable '${qtdScripts}' not found.</status>
+</test>
+<status status="FAIL" starttime="20200527 11:56:24.161" endtime="20200527 11:56:26.984"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2">Critical Tests</stat>
+<stat pass="0" fail="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="2" id="s1" name="apiTest">apiTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

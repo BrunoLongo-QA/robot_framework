@@ -1,0 +1,2076 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200616 11:14:42.501" rpa="false">
+<suite id="s1" name="Api Request Test" source="/Users/blongo/Documents/gitHub/qaInitiative/robot/suites/api_request_test.robot">
+<kw name="Run Keywords" library="BuiltIn" type="setup">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Connect To API</arg>
+<arg>Get The Playbook Files</arg>
+</arguments>
+<kw name="Connect To API" library="apiNext">
+<doc>Connect to Next API end point</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>${URLAPI}/</arg>
+<arg>verify=False</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.956" level="INFO">Creating Session using : alias=NextApi, url=https://local.blueops.net/tupix/api/v1/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200616 11:14:42.955" endtime="20200616 11:14:42.956"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.955" endtime="20200616 11:14:42.956"></status>
+</kw>
+<kw name="Get The Playbook Files" library="apiNext">
+<doc>Check the directory and load all quantity of files and the files name for use in the loop</doc>
+<kw name="Count Files In Directory" library="OperatingSystem">
+<doc>Wrapper for `Count Items In Directory` returning only file count.</doc>
+<arguments>
+<arg>${PATH}</arg>
+</arguments>
+<assign>
+<var>${SCRIPTQTD}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.958" level="INFO" html="yes">Listing contents of directory '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:14:42.958" level="INFO">2 files.</msg>
+<msg timestamp="20200616 11:14:42.958" level="INFO">${SCRIPTQTD} = 2</msg>
+<status status="PASS" starttime="20200616 11:14:42.957" endtime="20200616 11:14:42.959"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>...</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:14:42.959" endtime="20200616 11:14:42.959"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Qauntity of files in the folder ${SCRIPTQTD}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:14:42.960" endtime="20200616 11:14:42.960"></status>
+</kw>
+<kw name="List Files In Directory" library="OperatingSystem">
+<doc>Wrapper for `List Directory` that returns only files.</doc>
+<arguments>
+<arg>${PATH}</arg>
+</arguments>
+<assign>
+<var>${FILESLIST}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.961" level="INFO" html="yes">Listing contents of directory '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:14:42.962" level="INFO">2 files:
+GEN_URL_Down-LabCentOS6.txt
+GEN_URL_Down-LabCentOS7.txt</msg>
+<msg timestamp="20200616 11:14:42.962" level="INFO">${FILESLIST} = ['GEN_URL_Down-LabCentOS6.txt', 'GEN_URL_Down-LabCentOS7.txt']</msg>
+<status status="PASS" starttime="20200616 11:14:42.960" endtime="20200616 11:14:42.962"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Names of the files in the Folder ${FILESLIST}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:14:42.963" endtime="20200616 11:14:42.964"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${SCRIPTQTD}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.965" level="INFO">${SCRIPTQTD} = 2</msg>
+<status status="PASS" starttime="20200616 11:14:42.964" endtime="20200616 11:14:42.965"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${FILESLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.966" level="INFO">${FILESLIST} = ['GEN_URL_Down-LabCentOS6.txt', 'GEN_URL_Down-LabCentOS7.txt']</msg>
+<status status="PASS" starttime="20200616 11:14:42.965" endtime="20200616 11:14:42.966"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.957" endtime="20200616 11:14:42.966"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.954" endtime="20200616 11:14:42.966"></status>
+</kw>
+<test id="s1-t1" name="Running The Playbook Files By Request">
+<kw name="${INDEX} IN RANGE [ ${SCRIPTQTD} ]" type="for">
+<kw name="${INDEX} = 0" type="foritem">
+<kw name="Run Playbook By Request" library="apiNext">
+<doc>This code runs the playbook by a request library and set the response global, this way we can use to validate the results.</doc>
+<arguments>
+<arg>${FILESLIST[${INDEX}]}</arg>
+</arguments>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${FILE}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+</arguments>
+<assign>
+<var>${FILE}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.975" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:14:42.976" level="INFO">${FILE} = cl1
+"GEN_URL_Down.yml"
+
+"centos8"
+"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"
+120
+aborted</msg>
+<status status="PASS" starttime="20200616 11:14:42.974" endtime="20200616 11:14:42.976"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${CLIENT}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.976" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:42.976" endtime="20200616 11:14:42.976"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${PLAYBOOK}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.977" level="INFO">${PLAYBOOK} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200616 11:14:42.977" endtime="20200616 11:14:42.977"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${PBGROUPS}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.978" level="INFO">${PBGROUPS} = </msg>
+<status status="PASS" starttime="20200616 11:14:42.977" endtime="20200616 11:14:42.978"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${PBHOSTS}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.979" level="INFO">${PBHOSTS} = "centos8"</msg>
+<status status="PASS" starttime="20200616 11:14:42.978" endtime="20200616 11:14:42.979"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${PBADPARAM}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.979" level="INFO">${PBADPARAM} = "script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200616 11:14:42.979" endtime="20200616 11:14:42.980"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>5</arg>
+</arguments>
+<assign>
+<var>${TIME}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.981" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:42.980" endtime="20200616 11:14:42.981"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${JOB_STATUS}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.981" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:42.981" endtime="20200616 11:14:42.981"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>{ "adhoc": {"playbook": ${PLAYBOOK},"groups": [${PBGROUPS}],"hosts": [${PBHOSTS}],"playbook_additional_params":{${PBADPARAM}},"check_mode": "true"}}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.982" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "tru...</msg>
+<status status="PASS" starttime="20200616 11:14:42.982" endtime="20200616 11:14:42.983"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.984" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:42.983" endtime="20200616 11:14:42.984"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.986" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "tru...</msg>
+<status status="PASS" starttime="20200616 11:14:42.985" endtime="20200616 11:14:42.986"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${CLIENT}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.988" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:42.987" endtime="20200616 11:14:42.988"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${TIME}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:42.989" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:42.988" endtime="20200616 11:14:42.989"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.972" endtime="20200616 11:14:42.989"></status>
+</kw>
+<kw name="Convert String to JSON" library="JSONLibrary">
+<doc>Convert String to JSON object</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.990" level="INFO">${ADHOCSTR} = {'adhoc': {'playbook': 'GEN_URL_Down.yml', 'groups': [], 'hosts': ['centos8'], 'playbook_additional_params': {'script_path': 'scripts/linux/url_down.sh', 'script_params': 'w3.ibm.com'}, 'check_mode': ...</msg>
+<status status="PASS" starttime="20200616 11:14:42.989" endtime="20200616 11:14:42.990"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=Token token=${TOKEN}</arg>
+</arguments>
+<assign>
+<var>${HEADERS}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.991" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a45...</msg>
+<status status="PASS" starttime="20200616 11:14:42.990" endtime="20200616 11:14:42.991"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>clients/${CLIENT}/adhoc/run/</arg>
+<arg>data=${ADHOCSTR}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:42.995" level="INFO">POST Request using : uri=clients/cl1/adhoc/run/, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data={"adhoc": {"playbook": "GEN_URL_Down.yml", "groups": [], "hosts": ["centos8"], "playbook_additional_params": {"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"}, "check_mode": "true"}} 
+json=None</msg>
+<msg timestamp="20200616 11:14:46.047" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:46.048" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:42.994" endtime="20200616 11:14:46.048"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.052" level="INFO">{"message":"Playbook execution started successfully","job_id":"CL1-AH0000251"}</msg>
+<status status="PASS" starttime="20200616 11:14:46.051" endtime="20200616 11:14:46.052"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job_id"]}</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:14:46.053" level="INFO">${JOBID} = CL1-AH0000251</msg>
+<status status="PASS" starttime="20200616 11:14:46.052" endtime="20200616 11:14:46.053"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+<arg>-7</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:14:46.054" level="INFO">${JOBID} = 0000251</msg>
+<status status="PASS" starttime="20200616 11:14:46.053" endtime="20200616 11:14:46.054"></status>
+</kw>
+<kw name="Move File" library="OperatingSystem">
+<doc>Moves the source file into the destination.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+<arg>${PROCESSED}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.059" level="INFO" html="yes">Source '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;' and destination '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;' point to the same file.</msg>
+<status status="PASS" starttime="20200616 11:14:46.054" endtime="20200616 11:14:46.059"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.060" level="INFO">${JOBID} = 0000251</msg>
+<status status="PASS" starttime="20200616 11:14:46.059" endtime="20200616 11:14:46.060"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${HEADERS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.063" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a45...</msg>
+<status status="PASS" starttime="20200616 11:14:46.063" endtime="20200616 11:14:46.063"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.064" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:46.064" endtime="20200616 11:14:46.064"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.970" endtime="20200616 11:14:46.065"></status>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<arguments>
+<arg>30x</arg>
+<arg>1.0s</arg>
+<arg>Check Job Status By Request</arg>
+</arguments>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:46.067" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:46.207" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:46.229" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:46.066" endtime="20200616 11:14:46.229"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.230" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:46.230" endtime="20200616 11:14:46.231"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:46.239" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:46.231" endtime="20200616 11:14:46.239"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:46.066" endtime="20200616 11:14:46.240"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:47.244" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:47.350" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:47.351" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:47.243" endtime="20200616 11:14:47.351"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:47.352" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:47.351" endtime="20200616 11:14:47.352"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:47.353" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:47.352" endtime="20200616 11:14:47.353"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:47.241" endtime="20200616 11:14:47.353"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:48.357" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:48.465" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:48.466" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:48.356" endtime="20200616 11:14:48.466"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:48.467" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:48.466" endtime="20200616 11:14:48.467"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:48.468" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:48.467" endtime="20200616 11:14:48.468"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:48.355" endtime="20200616 11:14:48.468"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:49.470" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:49.571" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:49.571" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:49.469" endtime="20200616 11:14:49.571"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:49.573" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:49.572" endtime="20200616 11:14:49.573"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:49.574" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:49.573" endtime="20200616 11:14:49.574"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:49.469" endtime="20200616 11:14:49.574"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:50.578" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:50.679" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:50.679" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:50.577" endtime="20200616 11:14:50.679"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:50.680" level="INFO">running</msg>
+<status status="PASS" starttime="20200616 11:14:50.680" endtime="20200616 11:14:50.681"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:50.681" level="FAIL">Value of dictionary key 'status' does not match: running != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:50.681" endtime="20200616 11:14:50.681"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:50.577" endtime="20200616 11:14:50.682"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:51.685" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:51.878" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:51.878" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:51.684" endtime="20200616 11:14:51.878"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:51.880" level="INFO">abort request</msg>
+<status status="PASS" starttime="20200616 11:14:51.879" endtime="20200616 11:14:51.880"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:51.881" level="FAIL">Value of dictionary key 'status' does not match: abort request != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:51.880" endtime="20200616 11:14:51.881"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:51.683" endtime="20200616 11:14:51.881"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.888" level="INFO">GET Request using : uri=jobs/0000251, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:52.961" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:52.961" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:52.885" endtime="20200616 11:14:52.961"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:52.962" level="INFO">aborted</msg>
+<status status="PASS" starttime="20200616 11:14:52.962" endtime="20200616 11:14:52.963"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:14:52.964" endtime="20200616 11:14:52.966"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:52.884" endtime="20200616 11:14:52.968"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:46.065" endtime="20200616 11:14:52.969"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.970" endtime="20200616 11:14:52.969"></status>
+</kw>
+<kw name="${INDEX} = 1" type="foritem">
+<kw name="Run Playbook By Request" library="apiNext">
+<doc>This code runs the playbook by a request library and set the response global, this way we can use to validate the results.</doc>
+<arguments>
+<arg>${FILESLIST[${INDEX}]}</arg>
+</arguments>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${FILE}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+</arguments>
+<assign>
+<var>${FILE}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.973" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:14:52.975" level="INFO">${FILE} = cl1
+"GEN_URL_Down.yml"
+
+"centos8"
+"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"
+120
+aborted</msg>
+<status status="PASS" starttime="20200616 11:14:52.972" endtime="20200616 11:14:52.975"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${CLIENT}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.977" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:52.975" endtime="20200616 11:14:52.978"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${PLAYBOOK}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.979" level="INFO">${PLAYBOOK} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200616 11:14:52.978" endtime="20200616 11:14:52.979"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${PBGROUPS}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.979" level="INFO">${PBGROUPS} = </msg>
+<status status="PASS" starttime="20200616 11:14:52.979" endtime="20200616 11:14:52.979"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${PBHOSTS}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.981" level="INFO">${PBHOSTS} = "centos8"</msg>
+<status status="PASS" starttime="20200616 11:14:52.980" endtime="20200616 11:14:52.981"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${PBADPARAM}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.982" level="INFO">${PBADPARAM} = "script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"</msg>
+<status status="PASS" starttime="20200616 11:14:52.981" endtime="20200616 11:14:52.982"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>5</arg>
+</arguments>
+<assign>
+<var>${TIME}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.982" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:52.982" endtime="20200616 11:14:52.982"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${JOB_STATUS}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.983" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:52.983" endtime="20200616 11:14:52.983"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>{ "adhoc": {"playbook": ${PLAYBOOK},"groups": [${PBGROUPS}],"hosts": [${PBHOSTS}],"playbook_additional_params":{${PBADPARAM}},"check_mode": "true"}}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.984" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"},"check_mode": "true"}...</msg>
+<status status="PASS" starttime="20200616 11:14:52.984" endtime="20200616 11:14:52.984"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:52.985" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:52.985" endtime="20200616 11:14:52.985"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:52.986" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"},"check_mode": "true"}...</msg>
+<status status="PASS" starttime="20200616 11:14:52.986" endtime="20200616 11:14:52.986"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${CLIENT}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:52.987" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:52.987" endtime="20200616 11:14:52.988"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${TIME}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:52.988" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:52.988" endtime="20200616 11:14:52.988"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:52.970" endtime="20200616 11:14:52.989"></status>
+</kw>
+<kw name="Convert String to JSON" library="JSONLibrary">
+<doc>Convert String to JSON object</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.989" level="INFO">${ADHOCSTR} = {'adhoc': {'playbook': 'GEN_URL_Down.yml', 'groups': [], 'hosts': ['centos8'], 'playbook_additional_params': {'script_path': 'scripts/linux/url_down.sh', 'script_params': 'ibm.com'}, 'check_mode': 'tr...</msg>
+<status status="PASS" starttime="20200616 11:14:52.989" endtime="20200616 11:14:52.989"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=Token token=${TOKEN}</arg>
+</arguments>
+<assign>
+<var>${HEADERS}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.990" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a45...</msg>
+<status status="PASS" starttime="20200616 11:14:52.989" endtime="20200616 11:14:52.990"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>clients/${CLIENT}/adhoc/run/</arg>
+<arg>data=${ADHOCSTR}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:52.990" level="INFO">POST Request using : uri=clients/cl1/adhoc/run/, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data={"adhoc": {"playbook": "GEN_URL_Down.yml", "groups": [], "hosts": ["centos8"], "playbook_additional_params": {"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"}, "check_mode": "true"}} 
+json=None</msg>
+<msg timestamp="20200616 11:14:53.853" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:53.854" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:52.990" endtime="20200616 11:14:53.854"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.855" level="INFO">{"message":"Playbook execution started successfully","job_id":"CL1-AH0000252"}</msg>
+<status status="PASS" starttime="20200616 11:14:53.855" endtime="20200616 11:14:53.855"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job_id"]}</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:14:53.857" level="INFO">${JOBID} = CL1-AH0000252</msg>
+<status status="PASS" starttime="20200616 11:14:53.856" endtime="20200616 11:14:53.857"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+<arg>-7</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:14:53.857" level="INFO">${JOBID} = 0000252</msg>
+<status status="PASS" starttime="20200616 11:14:53.857" endtime="20200616 11:14:53.857"></status>
+</kw>
+<kw name="Move File" library="OperatingSystem">
+<doc>Moves the source file into the destination.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+<arg>${PROCESSED}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.860" level="INFO" html="yes">Source '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;' and destination '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;' point to the same file.</msg>
+<status status="PASS" starttime="20200616 11:14:53.858" endtime="20200616 11:14:53.860"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.861" level="INFO">${JOBID} = 0000252</msg>
+<status status="PASS" starttime="20200616 11:14:53.860" endtime="20200616 11:14:53.862"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${HEADERS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.864" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a45...</msg>
+<status status="PASS" starttime="20200616 11:14:53.862" endtime="20200616 11:14:53.864"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.865" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:53.865" endtime="20200616 11:14:53.865"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:52.969" endtime="20200616 11:14:53.866"></status>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<arguments>
+<arg>30x</arg>
+<arg>1.0s</arg>
+<arg>Check Job Status By Request</arg>
+</arguments>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:53.868" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:53.950" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:53.950" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:53.867" endtime="20200616 11:14:53.950"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.951" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:53.950" endtime="20200616 11:14:53.951"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:53.952" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:53.951" endtime="20200616 11:14:53.952"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:53.866" endtime="20200616 11:14:53.952"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:54.957" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:55.037" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:55.037" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:54.955" endtime="20200616 11:14:55.037"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:55.038" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:55.037" endtime="20200616 11:14:55.038"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:55.039" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:55.038" endtime="20200616 11:14:55.039"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:54.953" endtime="20200616 11:14:55.039"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:56.041" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:56.111" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:56.111" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:56.041" endtime="20200616 11:14:56.111"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:56.112" level="INFO">started</msg>
+<status status="PASS" starttime="20200616 11:14:56.111" endtime="20200616 11:14:56.112"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:56.114" level="FAIL">Value of dictionary key 'status' does not match: started != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:56.113" endtime="20200616 11:14:56.114"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:56.040" endtime="20200616 11:14:56.114"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:57.115" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:57.254" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:57.254" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:57.115" endtime="20200616 11:14:57.254"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:57.255" level="INFO">running</msg>
+<status status="PASS" starttime="20200616 11:14:57.254" endtime="20200616 11:14:57.255"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:57.256" level="FAIL">Value of dictionary key 'status' does not match: running != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:57.255" endtime="20200616 11:14:57.257"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:57.115" endtime="20200616 11:14:57.257"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:58.259" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:58.414" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:58.415" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:58.258" endtime="20200616 11:14:58.415"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:58.416" level="INFO">abort request</msg>
+<status status="PASS" starttime="20200616 11:14:58.415" endtime="20200616 11:14:58.416"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:58.417" level="FAIL">Value of dictionary key 'status' does not match: abort request != aborted</msg>
+<status status="FAIL" starttime="20200616 11:14:58.416" endtime="20200616 11:14:58.417"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:14:58.258" endtime="20200616 11:14:58.417"></status>
+</kw>
+<kw name="Check Job Status By Request" library="apiNext">
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>NextApi</arg>
+<arg>jobs/${JOBID}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.421" level="INFO">GET Request using : uri=jobs/0000252, params=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200616 11:14:59.520" level="INFO">/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made to host 'local.blueops.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20200616 11:14:59.520" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200616 11:14:59.420" endtime="20200616 11:14:59.520"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]["status"]}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:59.521" level="INFO">aborted</msg>
+<status status="PASS" starttime="20200616 11:14:59.520" endtime="20200616 11:14:59.521"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()["job"]}</arg>
+<arg>status</arg>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:14:59.521" endtime="20200616 11:14:59.521"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:59.418" endtime="20200616 11:14:59.522"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:53.866" endtime="20200616 11:14:59.522"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:52.969" endtime="20200616 11:14:59.522"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:42.968" endtime="20200616 11:14:59.522"></status>
+</kw>
+<doc>Will check for every file on the directory and run the playbook</doc>
+<status status="PASS" starttime="20200616 11:14:42.966" endtime="20200616 11:14:59.522" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Running The Playbook Files By Command">
+<kw name="${INDEX} IN RANGE [ ${SCRIPTQTD} ]" type="for">
+<kw name="${INDEX} = 0" type="foritem">
+<kw name="Run Playbook By Command Line" library="apiNext">
+<doc>Run the playbook with the parameters in the txt file by a curl command line (depreciated)</doc>
+<arguments>
+<arg>${FILESLIST[${INDEX}]}</arg>
+</arguments>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${FILE}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+</arguments>
+<assign>
+<var>${FILE}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.525" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:14:59.527" level="INFO">${FILE} = cl1
+"GEN_URL_Down.yml"
+
+"centos8"
+"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"
+120
+aborted</msg>
+<status status="PASS" starttime="20200616 11:14:59.524" endtime="20200616 11:14:59.527"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${CLIENT}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.527" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:59.527" endtime="20200616 11:14:59.527"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${PLAYBOOK}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.532" level="INFO">${PLAYBOOK} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200616 11:14:59.528" endtime="20200616 11:14:59.532"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${PBGROUPS}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.533" level="INFO">${PBGROUPS} = </msg>
+<status status="PASS" starttime="20200616 11:14:59.533" endtime="20200616 11:14:59.533"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${PBHOSTS}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.534" level="INFO">${PBHOSTS} = "centos8"</msg>
+<status status="PASS" starttime="20200616 11:14:59.533" endtime="20200616 11:14:59.535"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${PBADPARAM}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.535" level="INFO">${PBADPARAM} = "script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200616 11:14:59.535" endtime="20200616 11:14:59.535"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>5</arg>
+</arguments>
+<assign>
+<var>${TIME}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.536" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:59.535" endtime="20200616 11:14:59.537"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${JOB_STATUS}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.537" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:59.537" endtime="20200616 11:14:59.538"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>{ "adhoc": {"playbook": ${PLAYBOOK},"groups": [${PBGROUPS}],"hosts": [${PBHOSTS}],"playbook_additional_params":{${PBADPARAM}},"check_mode": "true"}}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.538" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "tru...</msg>
+<status status="PASS" starttime="20200616 11:14:59.538" endtime="20200616 11:14:59.538"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:59.539" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:14:59.539" endtime="20200616 11:14:59.540"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:59.541" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "tru...</msg>
+<status status="PASS" starttime="20200616 11:14:59.540" endtime="20200616 11:14:59.541"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${CLIENT}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:59.541" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:14:59.541" endtime="20200616 11:14:59.541"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${TIME}</arg>
+</arguments>
+<msg timestamp="20200616 11:14:59.542" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:14:59.541" endtime="20200616 11:14:59.542"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:59.524" endtime="20200616 11:14:59.542"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=/</arg>
+<arg>${URLAPI}</arg>
+<arg>clients/${CLIENT}</arg>
+</arguments>
+<assign>
+<var>${ENDPOINT}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.543" level="INFO">${ENDPOINT} = https://local.blueops.net/tupix/api/v1/clients/cl1</msg>
+<status status="PASS" starttime="20200616 11:14:59.542" endtime="20200616 11:14:59.543"></status>
+</kw>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X POST -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${ENDPOINT}/adhoc/run/" -d \ '${ADHOCSTR}'</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:14:59.549" level="INFO">Running command 'curl -k -X POST -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/clients/cl1/adhoc/run/" -d  '{ "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "true"}}' 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:00.646" level="INFO">${RESPONSE} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:14:59.543" endtime="20200616 11:15:00.647"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.648" level="INFO">${RESPONSE} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:00.647" endtime="20200616 11:15:00.648"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.649" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   282    0    78  100   204     73    192  0:00:01  0:00:01 --:--:--   266
+100   282    0    78  100   204     73    192  0:00:01  0:00:01 --:--:--   266
+{"message":"Playbook execution started successfully","job_id":"CL1-AH0000253"}</msg>
+<status status="PASS" starttime="20200616 11:15:00.648" endtime="20200616 11:15:00.649"></status>
+</kw>
+<kw name="Move File" library="OperatingSystem">
+<doc>Moves the source file into the destination.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+<arg>${PROCESSED}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.651" level="INFO" html="yes">Source '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;' and destination '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;' point to the same file.</msg>
+<status status="PASS" starttime="20200616 11:15:00.649" endtime="20200616 11:15:00.651"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:59.523" endtime="20200616 11:15:00.651"></status>
+</kw>
+<kw name="Get JobID By Command Line" library="apiNext">
+<doc>Check the response information and gets the Job ID</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:15:00.652" endtime="20200616 11:15:00.653"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+<arg>-9</arg>
+<arg>-2</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:15:00.654" level="INFO">${JOBID} = 0000253</msg>
+<status status="PASS" starttime="20200616 11:15:00.653" endtime="20200616 11:15:00.654"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.654" level="INFO">0000253</msg>
+<status status="PASS" starttime="20200616 11:15:00.654" endtime="20200616 11:15:00.654"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.655" level="INFO">${JOBID} = 0000253</msg>
+<status status="PASS" starttime="20200616 11:15:00.655" endtime="20200616 11:15:00.655"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:00.651" endtime="20200616 11:15:00.655"></status>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<arguments>
+<arg>${TIME}x</arg>
+<arg>1.0s</arg>
+<arg>Check Job Status By Command Line</arg>
+</arguments>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:00.663" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000253" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:00.794" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:00.656" endtime="20200616 11:15:00.794"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.795" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   2009      0 --:--:-- --:--:-- --:--:--  2009
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:00.795" endtime="20200616 11:15:00.795"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<msg timestamp="20200616 11:15:00.796" level="FAIL">'  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   2009      0 --:--:-- --:--:-- --:--:--  2009
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}' contains '"status":"started"'</msg>
+<status status="FAIL" starttime="20200616 11:15:00.796" endtime="20200616 11:15:00.796"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:15:00.656" endtime="20200616 11:15:00.796"></status>
+</kw>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:01.807" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000253" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:01.949" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:01.800" endtime="20200616 11:15:01.950"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:01.950" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1778      0 --:--:-- --:--:-- --:--:--  1778
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:01.950" endtime="20200616 11:15:01.951"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<msg timestamp="20200616 11:15:01.951" level="FAIL">'  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1778      0 --:--:-- --:--:-- --:--:--  1778
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}' contains '"status":"started"'</msg>
+<status status="FAIL" starttime="20200616 11:15:01.951" endtime="20200616 11:15:01.951"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:15:01.798" endtime="20200616 11:15:01.952"></status>
+</kw>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:02.961" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000253" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:03.134" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:02.955" endtime="20200616 11:15:03.134"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:03.135" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1418      0 --:--:-- --:--:-- --:--:--  1418
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:03.135" endtime="20200616 11:15:03.136"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<msg timestamp="20200616 11:15:03.136" level="FAIL">'  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1418      0 --:--:-- --:--:-- --:--:--  1418
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"started","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:00.000Z","target":null}}' contains '"status":"started"'</msg>
+<status status="FAIL" starttime="20200616 11:15:03.136" endtime="20200616 11:15:03.137"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:15:02.954" endtime="20200616 11:15:03.137"></status>
+</kw>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.142" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000253" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:04.318" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:04.138" endtime="20200616 11:15:04.318"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:04.319" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1446      0 --:--:-- --:--:-- --:--:--  1446
+{"job":{"id":253,"uuid":"CL1-AH0000253","status":"running","play":null,"created_at":"2020-06-16T14:14:59.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:03.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:04.319" endtime="20200616 11:15:04.320"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:15:04.320" endtime="20200616 11:15:04.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:04.137" endtime="20200616 11:15:04.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:00.655" endtime="20200616 11:15:04.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:59.523" endtime="20200616 11:15:04.321"></status>
+</kw>
+<kw name="${INDEX} = 1" type="foritem">
+<kw name="Run Playbook By Command Line" library="apiNext">
+<doc>Run the playbook with the parameters in the txt file by a curl command line (depreciated)</doc>
+<arguments>
+<arg>${FILESLIST[${INDEX}]}</arg>
+</arguments>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${FILE}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+</arguments>
+<assign>
+<var>${FILE}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.323" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200616 11:15:04.324" level="INFO">${FILE} = cl1
+"GEN_URL_Down.yml"
+
+"centos8"
+"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"
+120
+aborted</msg>
+<status status="PASS" starttime="20200616 11:15:04.323" endtime="20200616 11:15:04.324"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${CLIENT}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.324" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:15:04.324" endtime="20200616 11:15:04.324"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${PLAYBOOK}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.328" level="INFO">${PLAYBOOK} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200616 11:15:04.325" endtime="20200616 11:15:04.328"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${PBGROUPS}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.329" level="INFO">${PBGROUPS} = </msg>
+<status status="PASS" starttime="20200616 11:15:04.328" endtime="20200616 11:15:04.329"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${PBHOSTS}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.329" level="INFO">${PBHOSTS} = "centos8"</msg>
+<status status="PASS" starttime="20200616 11:15:04.329" endtime="20200616 11:15:04.329"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${PBADPARAM}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.330" level="INFO">${PBADPARAM} = "script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"</msg>
+<status status="PASS" starttime="20200616 11:15:04.330" endtime="20200616 11:15:04.330"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>5</arg>
+</arguments>
+<assign>
+<var>${TIME}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.331" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:15:04.330" endtime="20200616 11:15:04.331"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${FILE}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${JOB_STATUS}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.332" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:15:04.331" endtime="20200616 11:15:04.332"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>{ "adhoc": {"playbook": ${PLAYBOOK},"groups": [${PBGROUPS}],"hosts": [${PBHOSTS}],"playbook_additional_params":{${PBADPARAM}},"check_mode": "true"}}</arg>
+</arguments>
+<assign>
+<var>${ADHOCSTR}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.333" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"},"check_mode": "true"}...</msg>
+<status status="PASS" starttime="20200616 11:15:04.332" endtime="20200616 11:15:04.333"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOB_STATUS}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:04.334" level="INFO">${JOB_STATUS} = aborted</msg>
+<status status="PASS" starttime="20200616 11:15:04.334" endtime="20200616 11:15:04.334"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${ADHOCSTR}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:04.335" level="INFO">${ADHOCSTR} = { "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"},"check_mode": "true"}...</msg>
+<status status="PASS" starttime="20200616 11:15:04.334" endtime="20200616 11:15:04.335"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${CLIENT}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:04.336" level="INFO">${CLIENT} = cl1</msg>
+<status status="PASS" starttime="20200616 11:15:04.335" endtime="20200616 11:15:04.336"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${TIME}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:04.337" level="INFO">${TIME} = 120</msg>
+<status status="PASS" starttime="20200616 11:15:04.336" endtime="20200616 11:15:04.337"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:04.322" endtime="20200616 11:15:04.337"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=/</arg>
+<arg>${URLAPI}</arg>
+<arg>clients/${CLIENT}</arg>
+</arguments>
+<assign>
+<var>${ENDPOINT}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.338" level="INFO">${ENDPOINT} = https://local.blueops.net/tupix/api/v1/clients/cl1</msg>
+<status status="PASS" starttime="20200616 11:15:04.338" endtime="20200616 11:15:04.338"></status>
+</kw>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X POST -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${ENDPOINT}/adhoc/run/" -d \ '${ADHOCSTR}'</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200616 11:15:04.342" level="INFO">Running command 'curl -k -X POST -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/clients/cl1/adhoc/run/" -d  '{ "adhoc": {"playbook": "GEN_URL_Down.yml","groups": [],"hosts": ["centos8"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "ibm.com"},"check_mode": "true"}}' 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:06.132" level="INFO">${RESPONSE} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:04.338" endtime="20200616 11:15:06.132"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.135" level="INFO">${RESPONSE} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:06.134" endtime="20200616 11:15:06.135"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.138" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   201    0     0  100   201      0    948 --:--:-- --:--:-- --:--:--   943
+100   201    0     0  100   201      0    165  0:00:01  0:00:01 --:--:--   165
+100   279    0    78  100   201     44    113  0:00:01  0:00:01 --:--:--   157
+{"message":"Playbook execution started successfully","job_id":"CL1-AH0000254"}</msg>
+<status status="PASS" starttime="20200616 11:15:06.137" endtime="20200616 11:15:06.139"></status>
+</kw>
+<kw name="Move File" library="OperatingSystem">
+<doc>Moves the source file into the destination.</doc>
+<arguments>
+<arg>${PATH}/${FILE}</arg>
+<arg>${PROCESSED}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.143" level="INFO" html="yes">Source '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;' and destination '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;' point to the same file.</msg>
+<status status="PASS" starttime="20200616 11:15:06.139" endtime="20200616 11:15:06.143"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:04.321" endtime="20200616 11:15:06.144"></status>
+</kw>
+<kw name="Get JobID By Command Line" library="apiNext">
+<doc>Check the response information and gets the Job ID</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:15:06.145" endtime="20200616 11:15:06.147"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+<arg>-9</arg>
+<arg>-2</arg>
+</arguments>
+<assign>
+<var>${JOBID}</var>
+</assign>
+<msg timestamp="20200616 11:15:06.149" level="INFO">${JOBID} = 0000254</msg>
+<status status="PASS" starttime="20200616 11:15:06.148" endtime="20200616 11:15:06.149"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.150" level="INFO">0000254</msg>
+<status status="PASS" starttime="20200616 11:15:06.150" endtime="20200616 11:15:06.150"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${JOBID}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.165" level="INFO">${JOBID} = 0000254</msg>
+<status status="PASS" starttime="20200616 11:15:06.151" endtime="20200616 11:15:06.165"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:06.144" endtime="20200616 11:15:06.166"></status>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<arguments>
+<arg>${TIME}x</arg>
+<arg>1.0s</arg>
+<arg>Check Job Status By Command Line</arg>
+</arguments>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:06.177" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000254" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:06.786" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:06.169" endtime="20200616 11:15:06.786"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.788" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0    375      0 --:--:-- --:--:-- --:--:--   374
+100   217    0   217    0     0    375      0 --:--:-- --:--:-- --:--:--   374
+{"job":{"id":254,"uuid":"CL1-AH0000254","status":"started","play":null,"created_at":"2020-06-16T14:15:04.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:06.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:06.787" endtime="20200616 11:15:06.788"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<msg timestamp="20200616 11:15:06.790" level="FAIL">'  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0    375      0 --:--:-- --:--:-- --:--:--   374
+100   217    0   217    0     0    375      0 --:--:-- --:--:-- --:--:--   374
+{"job":{"id":254,"uuid":"CL1-AH0000254","status":"started","play":null,"created_at":"2020-06-16T14:15:04.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:06.000Z","target":null}}' contains '"status":"started"'</msg>
+<status status="FAIL" starttime="20200616 11:15:06.788" endtime="20200616 11:15:06.791"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:15:06.169" endtime="20200616 11:15:06.791"></status>
+</kw>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:07.813" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000254" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:08.072" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:07.793" endtime="20200616 11:15:08.072"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:08.073" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1009      0 --:--:-- --:--:-- --:--:--  1009
+{"job":{"id":254,"uuid":"CL1-AH0000254","status":"started","play":null,"created_at":"2020-06-16T14:15:04.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:06.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:08.073" endtime="20200616 11:15:08.073"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<msg timestamp="20200616 11:15:08.074" level="FAIL">'  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0   1009      0 --:--:-- --:--:-- --:--:--  1009
+{"job":{"id":254,"uuid":"CL1-AH0000254","status":"started","play":null,"created_at":"2020-06-16T14:15:04.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:06.000Z","target":null}}' contains '"status":"started"'</msg>
+<status status="FAIL" starttime="20200616 11:15:08.073" endtime="20200616 11:15:08.074"></status>
+</kw>
+<status status="FAIL" starttime="20200616 11:15:07.792" endtime="20200616 11:15:08.074"></status>
+</kw>
+<kw name="Check Job Status By Command Line" library="apiNext">
+<doc>Runs a API get to test the JOB execution status</doc>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X GET -H "Authorization: Token token=${TOKEN}" -H "Content-Type: application/json" "${URLAPI}/jobs/${JOBID}"</arg>
+</arguments>
+<assign>
+<var>${EVENTLIST}</var>
+</assign>
+<msg timestamp="20200616 11:15:09.080" level="INFO">Running command 'curl -k -X GET -H "Authorization: Token token=46b251e30f64c816329d0a3a768ef05375f9e89aa1c7da3662ac8d3d6045791547b3d3f842e7b5acb8e02b1bb5f3d09aac1197af2562e7518a38a9085fa7729ff6a4519923026481696d0b22b6855c089912c9679e62ff299503f1714438f3c8f852727bcf414e40a052ef37e7c2f9fb44d3ecb5a216424f8b8ea5e429b5a516" -H "Content-Type: application/json" "https://local.blueops.net/tupix/api/v1/jobs/0000254" 2&gt;&amp;1'.</msg>
+<msg timestamp="20200616 11:15:09.318" level="INFO">${EVENTLIST} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200616 11:15:09.076" endtime="20200616 11:15:09.318"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+</arguments>
+<msg timestamp="20200616 11:15:09.319" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   217    0   217    0     0    990      0 --:--:-- --:--:-- --:--:--   990
+{"job":{"id":254,"uuid":"CL1-AH0000254","status":"running","play":null,"created_at":"2020-06-16T14:15:04.000Z","client_name":"Client BLongo","playbook_name":null,"updated_at":"2020-06-16T14:15:09.000Z","target":null}}</msg>
+<status status="PASS" starttime="20200616 11:15:09.319" endtime="20200616 11:15:09.319"></status>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${EVENTLIST}</arg>
+<arg>"status":"started"</arg>
+</arguments>
+<status status="PASS" starttime="20200616 11:15:09.319" endtime="20200616 11:15:09.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:09.075" endtime="20200616 11:15:09.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:06.168" endtime="20200616 11:15:09.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:15:04.321" endtime="20200616 11:15:09.320"></status>
+</kw>
+<status status="PASS" starttime="20200616 11:14:59.523" endtime="20200616 11:15:09.320"></status>
+</kw>
+<doc>Will check for every file on the directory and run the playbook</doc>
+<status status="PASS" starttime="20200616 11:14:59.522" endtime="20200616 11:15:09.321" critical="yes"></status>
+</test>
+<doc>Author: Bruno Longo
+Version: 1.3.1
+Description: Automation to run the PB by API using request.
+For the complete documentation check: https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/W6f3c4680e937_4592_ae2a_bd086384af9f/page/(Draft)%20Robot%20Documentation</doc>
+<status status="PASS" starttime="20200616 11:14:42.503" endtime="20200616 11:15:09.324"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="Api Request Test">Api Request Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

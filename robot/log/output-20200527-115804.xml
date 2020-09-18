@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.7 on darwin)" generated="20200527 11:58:04.693" rpa="false">
+<suite id="s1" name="apiTest" source="/Users/blongo/Documents/gitHub/qaInitiative/robot/suites/apiTest.robot">
+<test id="s1-t1" name="Get The Playbook Files">
+<kw name="Count Files In Directory" library="OperatingSystem">
+<doc>Wrapper for `Count Items In Directory` returning only file count.</doc>
+<arguments>
+<arg>${localPath}/scriptToRun</arg>
+</arguments>
+<assign>
+<var>${qtdScripts}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.146" level="INFO" html="yes">Listing contents of directory '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:05.147" level="INFO">2 files.</msg>
+<msg timestamp="20200527 11:58:05.147" level="INFO">${qtdScripts} = 2</msg>
+<status status="PASS" starttime="20200527 11:58:05.142" endtime="20200527 11:58:05.147"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>...</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.148" endtime="20200527 11:58:05.150"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Qauntity of files in the folder ${qtdScripts}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.151" endtime="20200527 11:58:05.151"></status>
+</kw>
+<kw name="List Files In Directory" library="OperatingSystem">
+<doc>Wrapper for `List Directory` that returns only files.</doc>
+<arguments>
+<arg>${localPath}/scriptToRun</arg>
+</arguments>
+<assign>
+<var>${listFiles}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.160" level="INFO" html="yes">Listing contents of directory '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:05.160" level="INFO">2 files:
+GEN_URL_Down-LabCentOS6.txt
+GEN_URL_Down-LabCentOS7.txt</msg>
+<msg timestamp="20200527 11:58:05.161" level="INFO">${listFiles} = ['GEN_URL_Down-LabCentOS6.txt', 'GEN_URL_Down-LabCentOS7.txt']</msg>
+<status status="PASS" starttime="20200527 11:58:05.158" endtime="20200527 11:58:05.161"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Names of the files in the Folder ${listFiles}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.161" endtime="20200527 11:58:05.162"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${qtdScripts}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:05.163" level="INFO">${qtdScripts} = 2</msg>
+<status status="PASS" starttime="20200527 11:58:05.163" endtime="20200527 11:58:05.163"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${listFiles}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:05.177" level="INFO">${listFiles} = ['GEN_URL_Down-LabCentOS6.txt', 'GEN_URL_Down-LabCentOS7.txt']</msg>
+<status status="PASS" starttime="20200527 11:58:05.176" endtime="20200527 11:58:05.178"></status>
+</kw>
+<doc>Check the directory and load all quantity of files and the files name for use in the loop</doc>
+<status status="PASS" starttime="20200527 11:58:05.134" endtime="20200527 11:58:05.179" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Running The Playbook Files">
+<kw name="Connect To API" library="apiNext">
+<doc>Connect to Next API end point</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>qaNextAPI</arg>
+<arg>${urlAPI}</arg>
+<arg>verify=False</arg>
+</arguments>
+<msg timestamp="20200527 11:58:05.213" level="INFO">Creating Session using : alias=qaNextAPI, url=https://qa.blueops.net/api/v1/tupix/clients/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200527 11:58:05.211" endtime="20200527 11:58:05.213"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:05.193" endtime="20200527 11:58:05.214"></status>
+</kw>
+<kw name="${index} IN RANGE [ ${qtdScripts} ]" type="for">
+<kw name="${index} = 0" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>...</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.215" endtime="20200527 11:58:05.222"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Running Postion ${index} From The Path</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.222" endtime="20200527 11:58:05.223"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>This is the execution of the File ${listFiles[${index}]}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:05.229" endtime="20200527 11:58:05.272"></status>
+</kw>
+<kw name="Run Playbook By Command Line" library="apiNext">
+<doc>Run the playbook with the parameters in the txt file</doc>
+<arguments>
+<arg>${listFiles[${index}]}</arg>
+</arguments>
+<kw name="Get API Token" library="apiNext">
+<doc>Get the API token from a file to connect and run the API commands</doc>
+<assign>
+<var>${apiToken}</var>
+</assign>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${localPath}/apiTokenNext.txt</arg>
+</arguments>
+<assign>
+<var>${apiToken}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.277" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/apiTokenNext.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/apiTokenNext.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:05.278" level="INFO">${apiToken} = 8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b...</msg>
+<status status="PASS" starttime="20200527 11:58:05.276" endtime="20200527 11:58:05.278"></status>
+</kw>
+<msg timestamp="20200527 11:58:05.279" level="INFO">${apiToken} = 8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b...</msg>
+<status status="PASS" starttime="20200527 11:58:05.275" endtime="20200527 11:58:05.279"></status>
+</kw>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${file}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${localPath}/scriptToRun/${file}</arg>
+</arguments>
+<assign>
+<var>${file}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.282" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS6.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:05.284" level="INFO">${file} = "g2t"
+"GEN_URL_Down.yml"
+
+"labcentos6"
+"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200527 11:58:05.280" endtime="20200527 11:58:05.286"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${client}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.287" level="INFO">${client} = "g2t"</msg>
+<status status="PASS" starttime="20200527 11:58:05.286" endtime="20200527 11:58:05.287"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${playbook}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.288" level="INFO">${playbook} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200527 11:58:05.288" endtime="20200527 11:58:05.289"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${pbGroups}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.292" level="INFO">${pbGroups} = </msg>
+<status status="PASS" starttime="20200527 11:58:05.289" endtime="20200527 11:58:05.292"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${pbHosts}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.295" level="INFO">${pbHosts} = "labcentos6"</msg>
+<status status="PASS" starttime="20200527 11:58:05.293" endtime="20200527 11:58:05.295"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${pbAddParam}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.296" level="INFO">${pbAddParam} = "script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200527 11:58:05.295" endtime="20200527 11:58:05.296"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>'{ "adhoc": {"playbook": ${playbook},"group": [${pbGroups}],"hosts": [${pbHosts}],"playbook_additional_params":{${pbAddParam}},"check_mode": "true"}}'</arg>
+</arguments>
+<assign>
+<var>${adhocStr}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.298" level="INFO">${adhocStr} = '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": [],"hosts": ["labcentos6"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "...</msg>
+<status status="PASS" starttime="20200527 11:58:05.296" endtime="20200527 11:58:05.298"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${adhocStr}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:05.301" level="INFO">${adhocStr} = '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": [],"hosts": ["labcentos6"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "...</msg>
+<status status="PASS" starttime="20200527 11:58:05.300" endtime="20200527 11:58:05.301"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${client}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:05.302" level="INFO">${client} = "g2t"</msg>
+<status status="PASS" starttime="20200527 11:58:05.301" endtime="20200527 11:58:05.302"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:05.279" endtime="20200527 11:58:05.303"></status>
+</kw>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X POST -H "Authorization: Token token=${apiToken}" -H "Content-Type: application/json" "${urlAPI}/${client}/adhoc/run" -d \ ${adhocStr}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200527 11:58:05.382" level="INFO">Running command 'curl -k -X POST -H "Authorization: Token token=8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b38b7636ca9bd9603a3b89e16c992817754dba904923d949b691958e8" -H "Content-Type: application/json" "https://qa.blueops.net/api/v1/tupix/clients//"g2t"/adhoc/run" -d  '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": [],"hosts": ["labcentos6"],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "true"}}' 2&gt;&amp;1'.</msg>
+<msg timestamp="20200527 11:58:07.219" level="INFO">${response} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200527 11:58:05.308" endtime="20200527 11:58:07.219"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:07.221" level="INFO">${response} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200527 11:58:07.220" endtime="20200527 11:58:07.221"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:07.222" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100   352  100   146  100   206     82    115  0:00:01  0:00:01 --:--:--   198
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;center&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</msg>
+<status status="PASS" starttime="20200527 11:58:07.221" endtime="20200527 11:58:07.222"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:05.274" endtime="20200527 11:58:07.223"></status>
+</kw>
+<kw name="Check JobID" library="apiNext">
+<tags>
+<tag>draft</tag>
+</tags>
+<doc>Check the response information and validate the Job ID (UNDER DEVELOPEMNT)</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:07.224" endtime="20200527 11:58:07.226"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:07.223" endtime="20200527 11:58:07.226"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:05.215" endtime="20200527 11:58:07.226"></status>
+</kw>
+<kw name="${index} = 1" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>...</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:07.226" endtime="20200527 11:58:07.227"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Running Postion ${index} From The Path</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:07.227" endtime="20200527 11:58:07.227"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>This is the execution of the File ${listFiles[${index}]}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:07.228" endtime="20200527 11:58:07.228"></status>
+</kw>
+<kw name="Run Playbook By Command Line" library="apiNext">
+<doc>Run the playbook with the parameters in the txt file</doc>
+<arguments>
+<arg>${listFiles[${index}]}</arg>
+</arguments>
+<kw name="Get API Token" library="apiNext">
+<doc>Get the API token from a file to connect and run the API commands</doc>
+<assign>
+<var>${apiToken}</var>
+</assign>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${localPath}/apiTokenNext.txt</arg>
+</arguments>
+<assign>
+<var>${apiToken}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.235" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/apiTokenNext.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/apiTokenNext.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:07.236" level="INFO">${apiToken} = 8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b...</msg>
+<status status="PASS" starttime="20200527 11:58:07.235" endtime="20200527 11:58:07.236"></status>
+</kw>
+<msg timestamp="20200527 11:58:07.236" level="INFO">${apiToken} = 8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b...</msg>
+<status status="PASS" starttime="20200527 11:58:07.229" endtime="20200527 11:58:07.237"></status>
+</kw>
+<kw name="Generate Playbook Param" library="apiNext">
+<doc>Get the playbook information from file and breaked down into the CURL command line</doc>
+<arguments>
+<arg>${file}</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${localPath}/scriptToRun/${file}</arg>
+</arguments>
+<assign>
+<var>${file}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.239" level="INFO" html="yes">Getting file '&lt;a href="file:///Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt"&gt;/Users/blongo/Documents/gitHub/qaInitiative/robot/source/scriptToRun/GEN_URL_Down-LabCentOS7.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20200527 11:58:07.241" level="INFO">${file} = "g2t"
+"GEN_URL_Down.yml"
+"linux"
+
+"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200527 11:58:07.238" endtime="20200527 11:58:07.242"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${client}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.248" level="INFO">${client} = "g2t"</msg>
+<status status="PASS" starttime="20200527 11:58:07.242" endtime="20200527 11:58:07.248"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${playbook}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.248" level="INFO">${playbook} = "GEN_URL_Down.yml"</msg>
+<status status="PASS" starttime="20200527 11:58:07.248" endtime="20200527 11:58:07.248"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${pbGroups}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.249" level="INFO">${pbGroups} = "linux"</msg>
+<status status="PASS" starttime="20200527 11:58:07.249" endtime="20200527 11:58:07.249"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${pbHosts}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.250" level="INFO">${pbHosts} = </msg>
+<status status="PASS" starttime="20200527 11:58:07.250" endtime="20200527 11:58:07.251"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${file}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${pbAddParam}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.251" level="INFO">${pbAddParam} = "script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"</msg>
+<status status="PASS" starttime="20200527 11:58:07.251" endtime="20200527 11:58:07.251"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>'{ "adhoc": {"playbook": ${playbook},"group": [${pbGroups}],"hosts": [${pbHosts}],"playbook_additional_params":{${pbAddParam}},"check_mode": "true"}}'</arg>
+</arguments>
+<assign>
+<var>${adhocStr}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.252" level="INFO">${adhocStr} = '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": ["linux"],"hosts": [],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "true"...</msg>
+<status status="PASS" starttime="20200527 11:58:07.252" endtime="20200527 11:58:07.253"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${adhocStr}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:07.253" level="INFO">${adhocStr} = '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": ["linux"],"hosts": [],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "true"...</msg>
+<status status="PASS" starttime="20200527 11:58:07.253" endtime="20200527 11:58:07.254"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${client}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:07.255" level="INFO">${client} = "g2t"</msg>
+<status status="PASS" starttime="20200527 11:58:07.254" endtime="20200527 11:58:07.255"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:07.237" endtime="20200527 11:58:07.255"></status>
+</kw>
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>curl -k -X POST -H "Authorization: Token token=${apiToken}" -H "Content-Type: application/json" "${urlAPI}/${client}/adhoc/run" -d \ ${adhocStr}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200527 11:58:07.270" level="INFO">Running command 'curl -k -X POST -H "Authorization: Token token=8ebb77a2fdc95bd7b38f54a99b960712f607965a98baa2952372ff1c8c033efb17ae91169f1f1dd04fd10fcacfdcc8498d2184bec5aeec444db7ccc923a0825157d19181d1d9acbc2128152ca9007f25a23902450477dfc29cebd4e65b254677d312b38b38b7636ca9bd9603a3b89e16c992817754dba904923d949b691958e8" -H "Content-Type: application/json" "https://qa.blueops.net/api/v1/tupix/clients//"g2t"/adhoc/run" -d  '{ "adhoc": {"playbook": "GEN_URL_Down.yml","group": ["linux"],"hosts": [],"playbook_additional_params":{"script_path": "scripts/linux/url_down.sh", "script_params": "w3.ibm.com"},"check_mode": "true"}}' 2&gt;&amp;1'.</msg>
+<msg timestamp="20200527 11:58:09.010" level="INFO">${response} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200527 11:58:07.256" endtime="20200527 11:58:09.010"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:09.011" level="INFO">${response} =   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0   ...</msg>
+<status status="PASS" starttime="20200527 11:58:09.011" endtime="20200527 11:58:09.011"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20200527 11:58:09.012" level="INFO">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100   347  100   146  100   201     86    119  0:00:01  0:00:01 --:--:--   205
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;center&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</msg>
+<status status="PASS" starttime="20200527 11:58:09.011" endtime="20200527 11:58:09.012"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:07.229" endtime="20200527 11:58:09.012"></status>
+</kw>
+<kw name="Check JobID" library="apiNext">
+<tags>
+<tag>draft</tag>
+</tags>
+<doc>Check the response information and validate the Job ID (UNDER DEVELOPEMNT)</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<status status="PASS" starttime="20200527 11:58:09.013" endtime="20200527 11:58:09.014"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:09.012" endtime="20200527 11:58:09.014"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:07.226" endtime="20200527 11:58:09.014"></status>
+</kw>
+<status status="PASS" starttime="20200527 11:58:05.215" endtime="20200527 11:58:09.014"></status>
+</kw>
+<doc>Will check for every file on the directory and run the playbook</doc>
+<status status="PASS" starttime="20200527 11:58:05.179" endtime="20200527 11:58:09.015" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200527 11:58:04.695" endtime="20200527 11:58:09.015"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="apiTest">apiTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

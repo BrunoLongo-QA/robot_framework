@@ -4,12 +4,11 @@ For use the robot automation is simple, just run/execute the RobotApplication.sh
 
 In these folders you will have the Robot Automation scripts and configurations.
 
-Any changes on the files can result in many problems for any issues, questions or new features just open a support here: https://github.ibm.com/la-innovation/qa_initiative/issues/new/choose
-
+Any changes on the files can result in many problems for any issues, questions or new features just open a support here: https://github.com/BrunoLongo-QA/robot_framework/issues
 
 ## DOWNLOAD
 
-For now you can download robot from: https://ibm.ent.box.com/folder/109788028490
+For now you can download robot from: (N/A)
 
 ## CONFIGURING & RUNNING
 
@@ -25,7 +24,7 @@ The scripts are simple's txt files with the following information and layout (th
 
 account code (Just the client code)
 
-"playbook.yml" 
+"playbook.yml"
 "group", "group2"
 "host1", "host2"
 "param_name": "param", "param_name2": "param2"
@@ -54,7 +53,7 @@ At the end of the execution a log will be created in the log directory (robot/lo
 
 The log is very simple to understand but if you have any problems just contact @Bruno-Pereira-Longo1.
 
-|Version|Features|Status|Link|
-|-------|--------|------|----|
-|1.3.1| Creation of the RobotApplication.sh file to run the robot, validation on the PB execution using the new features on the API and a refactoring of all the code to make the request to the API by a Request library and not by curl command, making the execution faster, smarter and enhancing the code value.| Deployed - Up to Date|https://ibm.ent.box.com/folder/109788028490|
-|1.2|First Draft version, runs the API by curl commands|Out of Date|Out of Date|
+| Version | Features                                                                                                                                                                                                                                                                                                      | Status                | Link        |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ----------- |
+| 1.3.1   | Creation of the RobotApplication.sh file to run the robot, validation on the PB execution using the new features on the API and a refactoring of all the code to make the request to the API by a Request library and not by curl command, making the execution faster, smarter and enhancing the code value. | Deployed - Up to Date | N/A         |
+| 1.2     | First Draft version, runs the API by curl commands                                                                                                                                                                                                                                                            | Out of Date           | Out of Date |
